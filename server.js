@@ -8577,9 +8577,7 @@ app.get("/api/whatsapp/webhook", (req, res) => {
   const token = req.query["hub.verify_token"];
   const challenge = req.query["hub.challenge"];
 
-  const verifyToken = String(
-  process.env.WHATSAPP_VERIFY_TOKEN || ""
-).trim();
+  const verifyToken = "silelan_whatsapp_2026_verify";
 
  if (
   mode === "subscribe" &&
