@@ -8577,13 +8577,17 @@ app.get("/api/whatsapp/webhook", (req, res) => {
   const token = req.query["hub.verify_token"];
   const challenge = req.query["hub.challenge"];
 
-  const verifyToken =
-    process.env.WHATSAPP_VERIFY_TOKEN || "";
+  const verifyToken = String(
+  process.env.WHATSAPP_VERIFY_TOKEN || ""
+).trim();
 
-  if (mode === "subscribe" && token === verifyToken) {
-    console.log("WhatsApp webhook verified successfully.");
-    return res.status(200).send(challenge);
-  }
+ if (
+  mode === "subscribe" &&
+  String(token || "").trim() === verifyToken
+) {
+  console.log("WhatsApp webhook verified successfully.");
+  return res.status(200).send(challenge);
+}
 
   console.log("WhatsApp webhook verification failed.");
 
